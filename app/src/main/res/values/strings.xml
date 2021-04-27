@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">What To See</string>
+    <string name="first_button">First Button</string>
+    <string name="second_button">second button</string>
 </resources>
