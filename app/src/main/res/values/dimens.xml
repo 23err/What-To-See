@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_button">10dp</dimen>
+    <dimen name="rating_text_size">12sp</dimen>
+    <dimen name="poster_width">150dp</dimen>
+    <dimen name="poster_height">200dp</dimen>
+    <dimen name="card_corner_radius">5dp</dimen>
+    <dimen name="title_margin_hor">3dp</dimen>
 </resources>

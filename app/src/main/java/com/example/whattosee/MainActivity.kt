@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         val weather = Repository.getWeather(0)
         val changeTempWeather = Repository.getWeatherChangeCopy(0, 27)
         textView.setText("В городе ${weather.city} температура ${weather.temperature}")
-
+        textView2.setText("В городе ${changeTempWeather.city} температура ${changeTempWeather.temperature}")
     }
 
     private fun findViews() {
