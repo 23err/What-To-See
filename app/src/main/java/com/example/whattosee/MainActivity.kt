@@ -5,45 +5,36 @@ import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.example.whattosee.databinding.MainFragmentBinding
+import com.example.whattosee.view.MainFragment
 import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "Main Activity"
-    private lateinit var textView: TextView
-    private lateinit var textView2: TextView
+    private lateinit var fragmentContainer:FrameLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        btnInit()
-        findViews()
-        setTextView()
-
+        initFragment()
     }
 
-    private fun setTextView() {
-        val weather = Repository.getWeather(0)
-        val changeTempWeather = Repository.getWeatherChangeCopy(0, 27)
-        textView.setText("В городе ${weather.city} температура ${weather.temperature}")
-        textView2.setText("В городе ${changeTempWeather.city} температура ${changeTempWeather.temperature}")
+
+    private fun initFragment() {
+        val fragment = MainFragment()
+        setFragment(fragment)
     }
 
-    private fun findViews() {
-        textView = findViewById<TextView>(R.id.textView)
-        textView2 = findViewById<TextView>(R.id.textView2)
+    private fun setFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .commitAllowingStateLoss()
     }
-
-    private fun btnInit() {
-        val btnFirst = findViewById<MaterialButton>(R.id.btnFirst)
-        btnFirst.setOnClickListener(View.OnClickListener {
-            Toast.makeText(applicationContext, "hello", Toast.LENGTH_SHORT).show()
-        })
-    }
-
-    fun btnTwoOnClick(view: View) {
-        Toast.makeText(applicationContext, "button two clicked", Toast.LENGTH_SHORT).show()
-    }
-
 }

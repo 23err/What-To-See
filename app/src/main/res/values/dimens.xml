@@ -6,4 +6,5 @@
     <dimen name="poster_height">200dp</dimen>
     <dimen name="card_corner_radius">5dp</dimen>
     <dimen name="title_margin_hor">3dp</dimen>
+    <dimen name="film_item_margin">5dp</dimen>
 </resources>
