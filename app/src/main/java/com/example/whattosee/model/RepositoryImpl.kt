@@ -23,7 +23,7 @@ class RepositoryImpl : Repository {
         )
     }
 
-    override fun getCategoryList(): ArrayList<Category> {
+    override fun getCategoryList(): ArrayList<Category>? {
 
         return categories
     }
