@@ -28,7 +28,7 @@ class RepositoryImpl : Repository {
         return categories
     }
 
-    override fun getFilmsInCategory(id: Int): Category? {
+    override fun getCategory(id: Int): Category? {
         return categories.find { it.id == id }
     }
 

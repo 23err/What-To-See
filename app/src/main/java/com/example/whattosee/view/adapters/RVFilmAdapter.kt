@@ -11,7 +11,7 @@ import com.example.whattosee.R
 import com.example.whattosee.model.Film
 
 class RVFilmAdapter(val context: Context) : RecyclerView.Adapter<RVFilmAdapter.ViewHolder>() {
-    lateinit var films: List<Film>
+    var films: List<Film> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RVFilmAdapter.ViewHolder {
         val layoutInflater = LayoutInflater.from(context)

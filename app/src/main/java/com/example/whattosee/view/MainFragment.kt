@@ -5,11 +5,10 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.example.whattosee.CategoryDataState
+import com.example.whattosee.CategoriesDataState
 import com.example.whattosee.R
 import com.example.whattosee.databinding.MainFragmentBinding
 import com.example.whattosee.model.Category
-import com.example.whattosee.model.Film
 import com.example.whattosee.view.adapters.RVCategoryAdapter
 import com.example.whattosee.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -50,19 +49,26 @@ class MainFragment : Fragment() {
 
     private fun setRecyclerView() = with(binding) {
         adapter = RVCategoryAdapter(requireContext())
+        adapter.onCategoryClick = object : RVCategoryAdapter.OnCategoryClick{
+            override fun onClick(category: Category) {
+                val id = category.id
+                val categoryFragment = CategoryFragment.newInstance(id)
+                Navigation.setFragment(requireFragmentManager(), categoryFragment)
+            }
+        }
         rvCategory.adapter = adapter
-        val observer = Observer<CategoryDataState> { renderData(it) }
+        val observer = Observer<CategoriesDataState> { renderData(it) }
         viewModel.liveDataToObserve.observe(viewLifecycleOwner, observer)
         viewModel.getCategories()
     }
 
-    private fun renderData(state: CategoryDataState) {
+    private fun renderData(state: CategoriesDataState) {
         when(state){
-            is CategoryDataState.Success -> {
+            is CategoriesDataState.Success -> {
                 adapter.categoryList = state.categories
                 adapter.notifyDataSetChanged()
             }
-            is CategoryDataState.Error ->{
+            is CategoriesDataState.Error ->{
                 var message = state.error.message
                 if (message == null) {
                     message = getString(R.string.unknown_error)
@@ -72,6 +78,5 @@ class MainFragment : Fragment() {
                         .show()
             }
         }
-
     }
 }

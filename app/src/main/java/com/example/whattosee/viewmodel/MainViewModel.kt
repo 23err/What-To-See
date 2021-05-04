@@ -2,25 +2,24 @@ package com.example.whattosee.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.whattosee.CategoryDataState
-import com.example.whattosee.model.Category
+import com.example.whattosee.CategoriesDataState
 import com.example.whattosee.model.Repository
 import com.example.whattosee.model.RepositoryImpl
 
 class MainViewModel(
-        val liveDataToObserve: MutableLiveData<CategoryDataState> = MutableLiveData(),
+        val liveDataToObserve: MutableLiveData<CategoriesDataState> = MutableLiveData(),
         private val repository: Repository = RepositoryImpl()
 ) : ViewModel() {
 
     fun getCategories() {
-        liveDataToObserve.value = CategoryDataState.Loading
+        liveDataToObserve.value = CategoriesDataState.Loading
         Thread() {
             Thread.sleep(1000)
             var categories = repository.getCategoryList()
             if (categories != null) {
-                liveDataToObserve.postValue(CategoryDataState.Success(categories))
+                liveDataToObserve.postValue(CategoriesDataState.Success(categories))
             } else {
-                liveDataToObserve.postValue(CategoryDataState.Error(Error("Что-то пошло не так")))
+                liveDataToObserve.postValue(CategoriesDataState.Error(Error("Что-то пошло не так")))
             }
 
         }.start()

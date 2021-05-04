@@ -9,6 +9,7 @@ class Navigation {
         fun setFragment(fragmentManager:FragmentManager, fragment:Fragment){
             fragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, fragment)
+                    .addToBackStack(null)
                     .commitAllowingStateLoss()
         }
     }

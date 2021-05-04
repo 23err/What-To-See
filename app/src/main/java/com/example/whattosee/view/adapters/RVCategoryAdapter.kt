@@ -12,6 +12,7 @@ import com.example.whattosee.model.Category
 class RVCategoryAdapter(private val context: Context) : RecyclerView.Adapter<RVCategoryAdapter.ViewHolder>() {
 
     var categoryList: List<Category> = listOf()
+    var onCategoryClick: OnCategoryClick? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RVCategoryAdapter.ViewHolder {
         val layoutInflater = LayoutInflater.from(context)
@@ -42,7 +43,14 @@ class RVCategoryAdapter(private val context: Context) : RecyclerView.Adapter<RVC
             val adapter = RVFilmAdapter(context)
             adapter.films = category.films
             rvFilms.adapter = adapter
+            title.setOnClickListener{
+                onCategoryClick?.onClick(category)
+            }
         }
+    }
+
+    interface OnCategoryClick{
+        fun onClick(category: Category)
     }
 
 }
