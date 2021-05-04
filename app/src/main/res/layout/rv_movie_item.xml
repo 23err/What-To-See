@@ -28,11 +28,12 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
+                android:layout_marginHorizontal="@dimen/title_margin_hor"
                 android:ellipsize="marquee"
+                android:gravity="center_horizontal"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
-                android:layout_marginHorizontal="@dimen/title_margin_hor"
+                android:textSize="14sp"
                 tools:text="День Сурка" />
 
             <TextView

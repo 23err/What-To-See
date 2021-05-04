@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.whattosee.databinding.MainFragmentBinding
 import com.example.whattosee.view.MainFragment
+import com.example.whattosee.view.Navigation
 import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
@@ -33,8 +34,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .commitAllowingStateLoss()
+        Navigation.setFragment(supportFragmentManager, fragment)
     }
 }
