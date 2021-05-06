@@ -2,19 +2,18 @@ package com.example.whattosee.view
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.whattosee.CategoryDataState
+import com.example.whattosee.model.datastate.CategoryDataState
 import com.example.whattosee.R
 import com.example.whattosee.databinding.CategoryFragmentBinding
 import com.example.whattosee.view.adapters.RVFilmAdapter
 import com.example.whattosee.viewmodel.CategoryViewModel
 import com.google.android.material.snackbar.Snackbar
 
-class CategoryFragment : Fragment() {
+class CategoryFragment : BaseFragment() {
 
     companion object {
         private val ID_CATEGORY = "id"
@@ -35,9 +34,12 @@ class CategoryFragment : Fragment() {
 
     private lateinit var viewModel: CategoryViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
+        super.onCreateView(inflater, container, savedInstanceState)
         val bundle = arguments
         bundle?.apply {
             idCategory = bundle.getInt(ID_CATEGORY)
@@ -60,29 +62,35 @@ class CategoryFragment : Fragment() {
 
 
     private fun setAdapter() = with(binding) {
-        adapter = RVFilmAdapter(requireContext())
+        adapter = RVFilmAdapter(
+            requireContext(),
+            )
         rvFilms.adapter = adapter
-        rvFilms.layoutManager=GridLayoutManager(context, 2)
+        rvFilms.layoutManager = GridLayoutManager(context, 2)
         viewModel.getFilms(idCategory)
     }
 
-    private fun renderData(state: CategoryDataState) {
+    private fun renderData(state: CategoryDataState) = with(binding) {
         when (state) {
             is CategoryDataState.Success -> {
+                loadingLayoutHide(loadingLayout)
                 val category = state.category
-                binding.title.text = state.category.title
+                title.text = state.category.title
                 adapter.films = category.films
                 adapter.notifyDataSetChanged()
             }
             is CategoryDataState.Error -> {
+                loadingLayoutHide(loadingLayout)
                 var message = state.error.message
                 if (message == null) {
                     message = getString(R.string.unknown_error)
                 }
-                Snackbar.make(binding.rvFilms, message, Snackbar.LENGTH_LONG)
-                        .setAction(getString(R.string.reload)){viewModel.getFilms(idCategory)}
-                        .show()
+                Snackbar.make(rvFilms, message, Snackbar.LENGTH_LONG)
+                    .setAction(getString(R.string.reload)) { viewModel.getFilms(idCategory) }
+                    .show()
             }
+
+            is CategoryDataState.Loading -> loadingLayoutShow(loadingLayout)
         }
     }
 

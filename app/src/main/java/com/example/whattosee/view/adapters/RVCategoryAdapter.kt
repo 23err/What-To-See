@@ -9,12 +9,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.whattosee.R
 import com.example.whattosee.model.Category
 
-class RVCategoryAdapter(private val context: Context) : RecyclerView.Adapter<RVCategoryAdapter.ViewHolder>() {
+class RVCategoryAdapter(
+    private val context: Context,
+    private val onCategoryClick: OnCategoryClick? = null,
+    private val onFilmClickListener: RVFilmAdapter.OnFilmClickListener? = null
+    ) : RecyclerView.Adapter<RVCategoryAdapter.ViewHolder>() {
 
     var categoryList: List<Category> = listOf()
-    var onCategoryClick: OnCategoryClick? = null
+//    private var onCategoryClick: OnCategoryClick? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RVCategoryAdapter.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): RVCategoryAdapter.ViewHolder {
         val layoutInflater = LayoutInflater.from(context)
         val view = layoutInflater.inflate(R.layout.rv_category_item, parent, false)
         return ViewHolder(view)
@@ -40,16 +47,16 @@ class RVCategoryAdapter(private val context: Context) : RecyclerView.Adapter<RVC
 
         fun bind(category: Category) {
             title.text = category.title
-            val adapter = RVFilmAdapter(context)
+            val adapter = RVFilmAdapter(context, onFilmClickListener)
             adapter.films = category.films
             rvFilms.adapter = adapter
-            title.setOnClickListener{
+            title.setOnClickListener {
                 onCategoryClick?.onClick(category)
             }
         }
     }
 
-    interface OnCategoryClick{
+    interface OnCategoryClick {
         fun onClick(category: Category)
     }
 

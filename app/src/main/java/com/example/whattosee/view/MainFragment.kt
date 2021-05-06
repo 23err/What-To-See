@@ -3,17 +3,18 @@ package com.example.whattosee.view
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.example.whattosee.CategoriesDataState
+import com.example.whattosee.model.datastate.CategoriesDataState
 import com.example.whattosee.R
 import com.example.whattosee.databinding.MainFragmentBinding
 import com.example.whattosee.model.Category
+import com.example.whattosee.model.Film
 import com.example.whattosee.view.adapters.RVCategoryAdapter
+import com.example.whattosee.view.adapters.RVFilmAdapter
 import com.example.whattosee.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
-class MainFragment : Fragment() {
+class MainFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = MainFragment()
@@ -24,8 +25,10 @@ class MainFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: RVCategoryAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         setHasOptionsMenu(true)
         _binding = MainFragmentBinding.inflate(inflater, container, false)
         return binding.root
@@ -48,35 +51,47 @@ class MainFragment : Fragment() {
     }
 
     private fun setRecyclerView() = with(binding) {
-        adapter = RVCategoryAdapter(requireContext())
-        adapter.onCategoryClick = object : RVCategoryAdapter.OnCategoryClick{
-            override fun onClick(category: Category) {
-                val id = category.id
-                val categoryFragment = CategoryFragment.newInstance(id)
-                Navigation.setFragment(requireFragmentManager(), categoryFragment)
+        adapter = RVCategoryAdapter(
+            requireContext(),
+            onCategoryClick = object : RVCategoryAdapter.OnCategoryClick {
+                override fun onClick(category: Category) {
+                    val id = category.id
+                    val categoryFragment = CategoryFragment.newInstance(id)
+                    Navigation.setFragment(requireFragmentManager(), categoryFragment)
+                }
+            },
+            onFilmClickListener = object : RVFilmAdapter.OnFilmClickListener {
+                override fun click(film: Film) {
+                    val filmFragment = FilmFragment.newInstance(film.id)
+                    Navigation.setFragment(requireFragmentManager(), filmFragment)
+                }
             }
-        }
+        )
+
         rvCategory.adapter = adapter
         val observer = Observer<CategoriesDataState> { renderData(it) }
         viewModel.liveDataToObserve.observe(viewLifecycleOwner, observer)
         viewModel.getCategories()
     }
 
-    private fun renderData(state: CategoriesDataState) {
-        when(state){
+    private fun renderData(state: CategoriesDataState) = with(binding) {
+        when (state) {
             is CategoriesDataState.Success -> {
+                loadingLayoutHide(loadingLayout)
                 adapter.categoryList = state.categories
                 adapter.notifyDataSetChanged()
             }
-            is CategoriesDataState.Error ->{
+            is CategoriesDataState.Error -> {
+                loadingLayoutHide(loadingLayout)
                 var message = state.error.message
                 if (message == null) {
                     message = getString(R.string.unknown_error)
                 }
                 Snackbar.make(binding.rvCategory, message, Snackbar.LENGTH_LONG)
-                        .setAction(getString(R.string.reload)){viewModel.getCategories()}
-                        .show()
+                    .setAction(getString(R.string.reload)) { viewModel.getCategories() }
+                    .show()
             }
+            is CategoriesDataState.Loading -> loadingLayoutShow(loadingLayout)
         }
     }
 }
