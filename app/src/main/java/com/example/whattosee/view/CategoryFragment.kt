@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.whattosee.model.datastate.CategoryDataState
 import com.example.whattosee.R
 import com.example.whattosee.databinding.CategoryFragmentBinding
+import com.example.whattosee.model.Film
 import com.example.whattosee.view.adapters.RVFilmAdapter
 import com.example.whattosee.viewmodel.CategoryViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -64,7 +65,13 @@ class CategoryFragment : BaseFragment() {
     private fun setAdapter() = with(binding) {
         adapter = RVFilmAdapter(
             requireContext(),
-            )
+            object : RVFilmAdapter.OnFilmClickListener {
+                override fun click(film: Film) {
+                    val filmFragment = FilmFragment.newInstance(film.id)
+                    Navigation.setFragment(requireFragmentManager(), filmFragment)
+                }
+            }
+        )
         rvFilms.adapter = adapter
         rvFilms.layoutManager = GridLayoutManager(context, 2)
         viewModel.getFilms(idCategory)

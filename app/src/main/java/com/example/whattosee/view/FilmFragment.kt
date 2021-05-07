@@ -1,10 +1,15 @@
 package com.example.whattosee.view
 
+import android.content.res.Resources
+import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.Toolbar
+import com.example.whattosee.MainActivity
 import com.example.whattosee.R
 import com.example.whattosee.databinding.FilmFragmentBinding
 import com.example.whattosee.model.Film
@@ -32,6 +37,10 @@ class FilmFragment : BaseFragment() {
     private val binding get() = _binding!!
     private var filmId = 0
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,8 +50,10 @@ class FilmFragment : BaseFragment() {
             filmId = getInt(ID_FILM)
         }
         _binding = FilmFragmentBinding.inflate(inflater)
+
         return binding.root
     }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

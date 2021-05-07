@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <attr name="loadingBackground" format="color|reference"/>
     <attr name="favoriteColor" format="color|reference"/>
-    <style name="Theme.WhatToSee" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="ThemeWhatToSee" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -17,4 +17,5 @@
         <item name="favoriteColor">@color/red_400</item>
         <!-- Customize your theme here. -->
     </style>
+
 </resources>
