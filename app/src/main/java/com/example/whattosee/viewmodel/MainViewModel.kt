@@ -2,13 +2,13 @@ package com.example.whattosee.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.whattosee.CategoriesDataState
+import com.example.whattosee.model.datastate.CategoriesDataState
 import com.example.whattosee.model.Repository
 import com.example.whattosee.model.RepositoryImpl
 
 class MainViewModel(
-        val liveDataToObserve: MutableLiveData<CategoriesDataState> = MutableLiveData(),
-        private val repository: Repository = RepositoryImpl()
+    val liveDataToObserve: MutableLiveData<CategoriesDataState> = MutableLiveData(),
+    private val repository: Repository = RepositoryImpl()
 ) : ViewModel() {
 
     fun getCategories() {
