@@ -11,10 +11,14 @@ class MainViewModel(
     private val repository: Repository = RepositoryImpl()
 ) : ViewModel() {
 
+    companion object{
+        private const val DELAY = 1000L
+    }
+
     fun getCategories() {
         liveDataToObserve.value = CategoriesDataState.Loading
         Thread() {
-            Thread.sleep(1000)
+            Thread.sleep(DELAY)
             var categories = repository.getCategoryList()
             if (categories != null) {
                 liveDataToObserve.postValue(CategoriesDataState.Success(categories))

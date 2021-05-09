@@ -11,10 +11,14 @@ class CategoryViewModel(
     private val repository: Repository = RepositoryImpl()
 ) : ViewModel() {
 
+    companion object{
+        private const val DELAY = 1000L
+    }
+
     fun getFilms(idCategory: Int) {
         liveData.value = CategoryDataState.Loading
         Thread{
-            Thread.sleep(1000)
+            Thread.sleep(DELAY)
             val category = repository.getCategory(idCategory)
             if (category == null) {
                 liveData.postValue(CategoryDataState.Error(Error("Нет категорий с таким id")))
@@ -24,5 +28,4 @@ class CategoryViewModel(
         }.start()
 
     }
-
 }

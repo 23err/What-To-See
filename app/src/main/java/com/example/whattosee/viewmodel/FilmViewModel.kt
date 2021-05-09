@@ -1,4 +1,4 @@
-package com.example.whattosee.view
+package com.example.whattosee.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,10 +11,15 @@ class FilmViewModel(
     val liveDataToObserve: MutableLiveData<FilmDataState> = MutableLiveData(),
     private val repository: Repository = RepositoryImpl()
 ) : ViewModel() {
+
+    companion object{
+        private const val DELAY = 1000L
+    }
+
     fun getFilm(id: Int) {
         liveDataToObserve.value = FilmDataState.Loading
         Thread {
-            Thread.sleep(1000)
+            Thread.sleep(DELAY)
             val film = repository.getFilm(id)
             film?.apply {
                 liveDataToObserve.postValue(FilmDataState.Success(film))

@@ -1,7 +1,7 @@
 package com.example.whattosee.model
 
 class RepositoryImpl : Repository {
-    val categories: ArrayList<Category>
+    val categories: List<Category>
 
     init {
         val films = listOf(
@@ -79,7 +79,7 @@ class RepositoryImpl : Repository {
                 "USA"
             ),
         )
-        categories = arrayListOf(
+        categories = listOf(
             Category(1, "Все", films),
             Category(2, "По рейтингу", films),
             Category(3, "Смотреть позже", films),
@@ -88,19 +88,14 @@ class RepositoryImpl : Repository {
         )
     }
 
-    override fun getCategoryList(): ArrayList<Category>? {
+    override fun getCategoryList(): List<Category>? = categories
 
-        return categories
-    }
-
-    override fun getCategory(id: Int): Category? {
-        return categories.find { it.id == id }
-    }
+    override fun getCategory(id: Int): Category? = categories.find { it.id == id }
 
     override fun getFilm(id: Int): Film? {
         var film: Film? = null
         categories.find {
-            film = it.films.find { it1 -> it1.id == id }
+            film = it.films.find { filmItem -> filmItem.id == id }
             film != null
         }
         return film

@@ -1,5 +1,6 @@
 package com.example.whattosee.view
 
+import RVCategoryAdapter
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
@@ -7,9 +8,10 @@ import androidx.lifecycle.Observer
 import com.example.whattosee.model.datastate.CategoriesDataState
 import com.example.whattosee.R
 import com.example.whattosee.databinding.MainFragmentBinding
+import com.example.whattosee.hide
 import com.example.whattosee.model.Category
 import com.example.whattosee.model.Film
-import com.example.whattosee.view.adapters.RVCategoryAdapter
+import com.example.whattosee.show
 import com.example.whattosee.view.adapters.RVFilmAdapter
 import com.example.whattosee.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -22,7 +24,7 @@ class MainFragment : BaseFragment() {
 
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
     private lateinit var adapter: RVCategoryAdapter
 
     override fun onCreateView(
@@ -36,13 +38,7 @@ class MainFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         setRecyclerView()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_fragment_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onDestroyView() {
@@ -55,43 +51,44 @@ class MainFragment : BaseFragment() {
             requireContext(),
             onCategoryClick = object : RVCategoryAdapter.OnCategoryClick {
                 override fun onClick(category: Category) {
-                    val id = category.id
-                    val categoryFragment = CategoryFragment.newInstance(id)
-                    Navigation.setFragment(requireFragmentManager(), categoryFragment)
+                    CategoryFragment.newInstance(category.id).let {
+                        Navigation.setFragment(requireFragmentManager(), it)
+                    }
                 }
             },
             onFilmClickListener = object : RVFilmAdapter.OnFilmClickListener {
                 override fun click(film: Film) {
-                    val filmFragment = FilmFragment.newInstance(film.id)
-                    Navigation.setFragment(requireFragmentManager(), filmFragment)
+                    FilmFragment.newInstance(film.id).let {
+                        Navigation.setFragment(requireFragmentManager(), it)
+                    }
                 }
             }
-        )
-
-        rvCategory.adapter = adapter
-        val observer = Observer<CategoriesDataState> { renderData(it) }
-        viewModel.liveDataToObserve.observe(viewLifecycleOwner, observer)
-        viewModel.getCategories()
+        ). also {
+            rvCategory.adapter = it
+        }
+        viewModel.apply {
+            liveDataToObserve.observe(viewLifecycleOwner, { renderData(it) } )
+            getCategories()
+        }
     }
 
     private fun renderData(state: CategoriesDataState) = with(binding) {
         when (state) {
             is CategoriesDataState.Success -> {
-                loadingLayoutHide(loadingLayout)
-                adapter.categoryList = state.categories
-                adapter.notifyDataSetChanged()
+                loadingLayout.root.hide()
+                adapter.apply {
+                    categoryList = state.categories
+                    notifyDataSetChanged()
+                }
             }
             is CategoriesDataState.Error -> {
-                loadingLayoutHide(loadingLayout)
-                var message = state.error.message
-                if (message == null) {
-                    message = getString(R.string.unknown_error)
-                }
+                loadingLayout.root.hide()
+                var message = state.error.message ?: getString(R.string.unknown_error)
                 Snackbar.make(binding.rvCategory, message, Snackbar.LENGTH_LONG)
                     .setAction(getString(R.string.reload)) { viewModel.getCategories() }
                     .show()
             }
-            is CategoriesDataState.Loading -> loadingLayoutShow(loadingLayout)
+            is CategoriesDataState.Loading -> loadingLayout.root.show()
         }
     }
 }

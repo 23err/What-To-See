@@ -34,6 +34,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setFragment(fragment: Fragment) {
-        Navigation.setFragment(supportFragmentManager, fragment)
+        Navigation.setFragment(supportFragmentManager, fragment, false)
     }
 }
