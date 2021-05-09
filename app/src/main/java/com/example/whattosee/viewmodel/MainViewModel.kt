@@ -11,7 +11,7 @@ class MainViewModel(
     private val repository: Repository = RepositoryImpl()
 ) : ViewModel() {
 
-    companion object{
+    companion object {
         private const val DELAY = 1000L
     }
 
@@ -19,15 +19,9 @@ class MainViewModel(
         liveDataToObserve.value = CategoriesDataState.Loading
         Thread() {
             Thread.sleep(DELAY)
-            var categories = repository.getCategoryList()
-            if (categories != null) {
-                liveDataToObserve.postValue(CategoriesDataState.Success(categories))
-            } else {
-                liveDataToObserve.postValue(CategoriesDataState.Error(Error("Что-то пошло не так")))
-            }
-
+            repository.getCategoryList()?.let {
+                liveDataToObserve.postValue(CategoriesDataState.Success(it))
+            } ?: liveDataToObserve.postValue(CategoriesDataState.Error(Error("Что-то пошло не так")))
         }.start()
-
     }
-
 }

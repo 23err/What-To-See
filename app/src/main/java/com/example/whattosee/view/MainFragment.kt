@@ -12,6 +12,7 @@ import com.example.whattosee.hide
 import com.example.whattosee.model.Category
 import com.example.whattosee.model.Film
 import com.example.whattosee.show
+import com.example.whattosee.showSnackBar
 import com.example.whattosee.view.adapters.RVFilmAdapter
 import com.example.whattosee.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -84,9 +85,7 @@ class MainFragment : BaseFragment() {
             is CategoriesDataState.Error -> {
                 loadingLayout.root.hide()
                 var message = state.error.message ?: getString(R.string.unknown_error)
-                Snackbar.make(binding.rvCategory, message, Snackbar.LENGTH_LONG)
-                    .setAction(getString(R.string.reload)) { viewModel.getCategories() }
-                    .show()
+                rvCategory.showSnackBar(message, {viewModel.getCategories()}, getString(R.string.reload))
             }
             is CategoriesDataState.Loading -> loadingLayout.root.show()
         }

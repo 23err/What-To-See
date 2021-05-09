@@ -20,9 +20,8 @@ class FilmViewModel(
         liveDataToObserve.value = FilmDataState.Loading
         Thread {
             Thread.sleep(DELAY)
-            val film = repository.getFilm(id)
-            film?.apply {
-                liveDataToObserve.postValue(FilmDataState.Success(film))
+            repository.getFilm(id)?.let{
+                liveDataToObserve.postValue(FilmDataState.Success(it))
             } ?: liveDataToObserve.postValue(FilmDataState.Error(Error("Фильм с таким id не найден")))
         }.start()
     }
