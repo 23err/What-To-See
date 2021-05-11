@@ -9,7 +9,7 @@ import java.lang.Error
 
 class FilmViewModel(
     val liveDataToObserve: MutableLiveData<FilmDataState> = MutableLiveData(),
-    private val repository: Repository = RepositoryImpl()
+    private val repository: Repository = RepositoryImpl
 ) : ViewModel() {
 
     companion object{

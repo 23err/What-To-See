@@ -33,7 +33,7 @@ class RVFilmAdapter(val context: Context, val onFilmClickListener: OnFilmClickLi
     inner class ViewHolder(val itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(film: Film) = with(binding){
             title.text = film.title
-            rating.text = film.rating.toString()
+            rating.text = film.rating
             filmLayout.setOnClickListener {
                 onFilmClickListener?.click(film)
             }
