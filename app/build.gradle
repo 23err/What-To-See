@@ -28,7 +28,7 @@ android {
     buildTypes.each {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("apikey.properties").newDataInputStream())
-        def apiKey  = properties.getProperty("kinopoisk_cloud_api_key", "")
+        def apiKey  = properties.getProperty("the_movie_db_api_key", "")
         it.buildConfigField "String", "FILMS_API_KEY", apiKey
     }
 

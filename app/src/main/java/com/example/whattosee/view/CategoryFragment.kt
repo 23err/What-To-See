@@ -18,6 +18,20 @@ import com.example.whattosee.viewmodel.CategoryViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class CategoryFragment : BaseFragment() {
+
+    companion object {
+        private const val ID_CATEGORY = "id"
+        private const val RV_SPAN_COUNT = 2
+
+        fun newInstance(idCategory: Int): CategoryFragment = CategoryFragment().apply {
+            Bundle().apply {
+                putInt(ID_CATEGORY, idCategory)
+            }.also {
+                arguments = it
+            }
+        }
+    }
+
     private var _binding: CategoryFragmentBinding? = null
     private val binding get() = _binding!!
     private var idCategory = 0
@@ -27,18 +41,6 @@ class CategoryFragment : BaseFragment() {
         ViewModelProvider(this).get(
             CategoryViewModel::class.java
         )
-    }
-
-    companion object {
-        private const val ID_CATEGORY = "id"
-
-        fun newInstance(idCategory: Int): CategoryFragment = CategoryFragment().apply {
-            Bundle().apply {
-                putInt(ID_CATEGORY, idCategory)
-            }.also {
-                arguments = it
-            }
-        }
     }
 
     override fun onCreateView(
@@ -76,7 +78,7 @@ class CategoryFragment : BaseFragment() {
         )
         rvFilms.let {
             it.adapter = adapter
-            it.layoutManager = GridLayoutManager(context, 2)
+            it.layoutManager = GridLayoutManager(context, RV_SPAN_COUNT)
         }
         viewModel.apply {
             liveData.observe(

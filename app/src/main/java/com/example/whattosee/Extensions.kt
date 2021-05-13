@@ -5,6 +5,7 @@ import android.view.View
 import com.example.whattosee.model.Film
 import com.example.whattosee.model.FilmDTO
 import com.example.whattosee.model.FilmsDTO
+import com.example.whattosee.model.PageDTO
 import com.google.android.material.snackbar.Snackbar
 
 fun View.show() {
@@ -39,12 +40,14 @@ fun FilmDTO.toFilm(): Film  = with(this){
     Film(
         id ?: 0,
         title ?: "",
-        rating_kinopoisk ?: "",
-        budget ?: "",
-        description ?: "",
-        countries?.joinToString(",") ?: "",
-        poster ?: ""
+        original_title ?: "-",
+        vote_average.toString() ?: "-",
+        overview ?: "",
+        "https://image.tmdb.org/t/p/w500" + backdrop_path ?: "",
+        budget?.let { if (it == 0) "-" else it.toString() } ?: "-",
+        release_date ?: "-",
+
     )
 }
 
-fun FilmsDTO.toFilms() = this.movies.map { it.toFilm() }
+fun PageDTO.toFilms() = this.results.map { it.toFilm() }

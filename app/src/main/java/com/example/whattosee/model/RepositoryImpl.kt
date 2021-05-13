@@ -1,13 +1,15 @@
 package com.example.whattosee.model
 
+import com.example.whattosee.toFilm
 import com.example.whattosee.toFilms
+
 
 object RepositoryImpl : Repository {
     var categories: List<Category>? = null
 
     private fun loadFilms() {
-        val filmsDTO = FilmLoader().loadFilms()
-        val films = filmsDTO.toFilms()
+        val pageDTO = FilmsLoader.loadFilms()
+        val films = pageDTO.toFilms()
         categories = listOf(
             Category(1, "Все", films),
             Category(2, "По рейтингу", films),
@@ -24,13 +26,9 @@ object RepositoryImpl : Repository {
 
     override fun getCategory(id: Int): Category? = categories?.find { it.id == id }
 
-    override fun getFilm(id: Int): Film? {
-        var film: Film? = null
-        categories?.find {
-            film = it.films.find { filmItem -> filmItem.id == id }
-            film != null
-        }
-        return film
+    override fun getFilm(id: Int): Film {
+        val filmDTO = FilmsLoader.loadFilm(id)
+        return filmDTO.toFilm()
     }
 }
 

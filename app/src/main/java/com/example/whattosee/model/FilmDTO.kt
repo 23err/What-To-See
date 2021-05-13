@@ -1,18 +1,12 @@
 package com.example.whattosee.model
 
 data class FilmDTO(
-    val id:Int?,
-    val id_kinopoisk:Int?,
+    val id: Int?,
+    val backdrop_path: String?,
+    val original_title:String?,
     val title:String?,
-    val title_alternative:String?,
-    val description:String?,
-    val actors: List<String?>?,
-    val countries:List<String?>?,
-    val budget:String?,
-    val trailer:String?,
-    val poster:String?,
-    val rating_kinopoisk:String?,
-    val rating_imdb:String?,
-    val premiere_world:String?,
-    val year:Int?,
+    val vote_average: Float?,
+    val overview: String?,
+    val budget : Int? = 0,
+    val release_date : String? = null,
 )

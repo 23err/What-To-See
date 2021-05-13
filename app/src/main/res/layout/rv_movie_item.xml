@@ -22,8 +22,8 @@
                 android:id="@+id/image"
                 android:layout_width="@dimen/poster_width"
                 android:layout_height="@dimen/poster_height"
-                android:scaleType="fitXY"
-                android:src="@drawable/day" />
+                android:scaleType="centerCrop"
+                android:src="@color/gray_400" />
 
             <TextView
                 android:id="@+id/title"
