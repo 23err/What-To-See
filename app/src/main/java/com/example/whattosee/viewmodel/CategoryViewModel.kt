@@ -8,7 +8,7 @@ import com.example.whattosee.model.RepositoryImpl
 
 class CategoryViewModel(
     val liveData: MutableLiveData<CategoryDataState> = MutableLiveData(),
-    private val repository: Repository = RepositoryImpl()
+    private val repository: Repository = RepositoryImpl
 ) : ViewModel() {
 
     companion object {

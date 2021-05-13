@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.whattosee.ImageLoaderTask
 import com.example.whattosee.databinding.RvCategoryItemBinding
 import com.example.whattosee.model.Category
 
@@ -43,6 +44,7 @@ class RVCategoryAdapter(
                 text = category.title
                 setOnClickListener { onCategoryClick?.onClick(category) }
             }
+
         }
     }
 

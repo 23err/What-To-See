@@ -246,3 +246,6 @@ fabric.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/androidstudio,android,java,kotlin
 /.idea/codeStyles/
+
+# api keys
+/apikey.properties

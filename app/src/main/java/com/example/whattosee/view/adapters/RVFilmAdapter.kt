@@ -8,6 +8,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.whattosee.ImageLoaderTask
 import com.example.whattosee.R
 import com.example.whattosee.databinding.RvMovieItemBinding
 import com.example.whattosee.model.Film
@@ -29,14 +30,17 @@ class RVFilmAdapter(val context: Context, val onFilmClickListener: OnFilmClickLi
     }
 
     override fun getItemCount(): Int = films.size
+    override fun getItemId(position: Int) = position.toLong()
+    override fun getItemViewType(position: Int) = position
 
-    inner class ViewHolder(val itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(var itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(film: Film) = with(binding){
             title.text = film.title
-            rating.text = film.rating.toString()
+            rating.text = film.rating
             filmLayout.setOnClickListener {
                 onFilmClickListener?.click(film)
             }
+            ImageLoaderTask(image).execute(film.image)
         }
     }
 

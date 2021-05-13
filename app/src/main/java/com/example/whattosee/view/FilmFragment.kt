@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.whattosee.ImageLoaderTask
 import com.example.whattosee.R
 import com.example.whattosee.databinding.FilmFragmentBinding
 import com.example.whattosee.hide
@@ -30,10 +31,6 @@ class FilmFragment : BaseFragment() {
                 putInt(ID_FILM, idFilm)
             }
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -78,8 +75,8 @@ class FilmFragment : BaseFragment() {
     private fun setData(film: Film) = with(binding){
         main_toolbar.title = film.title
         rating.text = film.rating.toString()
-        madeIn.text = film.madeIn
         budget.text = film.budget.toString()
         description.text = film.description
+        ImageLoaderTask(posterIV).execute(film.image)
     }
 }
