@@ -3,7 +3,7 @@
     <string name="first_button">First Button</string>
     <string name="second_button">second button</string>
     <string name="reload">Перезагрузить</string>
-    <string name="unknown_error">Не известная ошибка</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
     <string name="no_category_error">Нет категорий с таким id</string>
     <string name="rating">Рейтинг:</string>
     <string name="made_in">Страна производства:</string>
