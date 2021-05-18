@@ -1,5 +1,9 @@
 package com.example.whattosee.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class FilmDTO(
     val id: Int?,
     val backdrop_path: String?,
@@ -9,4 +13,4 @@ data class FilmDTO(
     val overview: String?,
     val budget : Int? = 0,
     val release_date : String? = null,
-)
+): Parcelable

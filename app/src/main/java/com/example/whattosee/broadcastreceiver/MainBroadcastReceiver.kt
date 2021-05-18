@@ -1,4 +1,4 @@
-package com.example.whattosee
+package com.example.whattosee.broadcastreceiver
 
 import android.content.BroadcastReceiver
 import android.content.Context

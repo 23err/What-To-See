@@ -1,6 +1,10 @@
 package com.example.whattosee.model
 
-data class PageDTO(
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class PageDTO (
     val page:Int,
     val results: List<FilmDTO>
-)
+): Parcelable
