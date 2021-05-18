@@ -1,6 +1,7 @@
 package com.example.whattosee
 
 import android.content.Context
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
@@ -20,13 +21,20 @@ import com.google.android.material.button.MaterialButton
 class MainActivity : AppCompatActivity() {
     private val TAG = "Main Activity"
     private lateinit var fragmentContainer:FrameLayout
+    private val receiver = MainBroadcastReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initFragment()
+        registerReceiver(receiver, IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION))
+
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
+    }
 
     private fun initFragment() {
         val fragment = MainFragment()
