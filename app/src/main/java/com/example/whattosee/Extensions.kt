@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.View
 import com.example.whattosee.model.Film
 import com.example.whattosee.model.FilmDTO
-import com.example.whattosee.model.FilmsDTO
 import com.example.whattosee.model.PageDTO
 import com.google.android.material.snackbar.Snackbar
 

@@ -2,6 +2,7 @@ package com.example.whattosee.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.whattosee.model.RemoteDataSource
 import com.example.whattosee.model.Repository
 import com.example.whattosee.model.RepositoryImpl
 import com.example.whattosee.model.datastate.FilmDataState
@@ -9,7 +10,7 @@ import java.lang.Error
 
 class FilmViewModel(
     val liveDataToObserve: MutableLiveData<FilmDataState> = MutableLiveData(),
-    private val repository: Repository = RepositoryImpl
+    private val repository: Repository = RepositoryImpl(RemoteDataSource())
 ) : ViewModel() {
 
     companion object{
