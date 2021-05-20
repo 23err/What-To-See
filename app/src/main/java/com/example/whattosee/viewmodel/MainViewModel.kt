@@ -66,17 +66,6 @@ class MainViewModel(
     fun getCategories() {
         liveDataToObserve.value = CategoriesDataState.Loading
         repository.getCategoryList(callback)
-//        Thread() {
-//            try {
-//                repository.getCategoryList()?.let {
-//                    liveDataToObserve.postValue(CategoriesDataState.Success(it))
-//                } ?: liveDataToObserve.postValue(CategoriesDataState.Error(Error("Что-то пошло не так")))
-//            } catch (e : Throwable){
-//                liveDataToObserve.postValue(CategoriesDataState.Error(Error("Произошла ошибки во время загрузки")))
-//                Log.e(TAG, e.message.toString())
-//            }
-//
-//        }.start()
     }
 
 
