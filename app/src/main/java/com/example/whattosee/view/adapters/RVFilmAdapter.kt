@@ -8,6 +8,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.whattosee.ImageLoaderTask
 import com.example.whattosee.R
 import com.example.whattosee.databinding.RvMovieItemBinding
@@ -40,7 +41,7 @@ class RVFilmAdapter(val context: Context, val onFilmClickListener: OnFilmClickLi
             filmLayout.setOnClickListener {
                 onFilmClickListener?.click(film)
             }
-            ImageLoaderTask(image).execute(film.image)
+            Glide.with(context).load(film.image).into(image)
         }
     }
 

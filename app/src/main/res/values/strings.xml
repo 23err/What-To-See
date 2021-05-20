@@ -9,5 +9,8 @@
     <string name="made_in">Страна производства:</string>
     <string name="budget">Бюджет</string>
     <string name="description">Описание:</string>
+    <string name="message_from_system">Сообщение от системы\n</string>
+    <string name="action">Action:</string>
+    <string name="error_occurred">Произошла ошибка</string>
     <string name="tools_description_text">asdjknsad asdkjfnsakdf asdklf asdkfj asdfjkl asdklfj asdkfj askldf asdkfj asdkfj asldkf asdkf asdfewqwe234</string>
 </resources>

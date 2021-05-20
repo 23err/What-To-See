@@ -1,6 +1,9 @@
 package com.example.whattosee.model
+
+import retrofit2.Callback
+
 interface Repository {
-    fun getCategoryList(): List<Category>?
-    fun getCategory(id:Int): Category?
-    fun getFilm(id: Int): Film?
+    fun getCategoryList(callback : Callback<PageDTO>)
+    fun getCategory(id:Int, callback: Callback<PageDTO>)
+    fun getFilm(id: Int, callback: Callback<FilmDTO>)
 }

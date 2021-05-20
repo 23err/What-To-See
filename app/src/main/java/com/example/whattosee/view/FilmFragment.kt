@@ -14,6 +14,7 @@ import com.example.whattosee.model.datastate.FilmDataState
 import com.example.whattosee.show
 import com.example.whattosee.viewmodel.FilmViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.film_fragment.*
 
 class FilmFragment : BaseFragment() {
@@ -77,6 +78,9 @@ class FilmFragment : BaseFragment() {
         rating.text = film.rating.toString()
         budget.text = film.budget.toString()
         description.text = film.description
-        ImageLoaderTask(posterIV).execute(film.image)
+        Picasso.get()
+            .load(film.image)
+            .into(posterIV)
+
     }
 }
