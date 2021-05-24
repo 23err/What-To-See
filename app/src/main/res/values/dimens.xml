@@ -12,4 +12,6 @@
     <dimen name="tv_start_margin">10dp</dimen>
     <dimen name="setting_layout_padding">10dp</dimen>
     <dimen name="toolbar_height">40dp</dimen>
+    <dimen name="desctiption_margin">10dp</dimen>
+    <dimen name="comment_padding">10dp</dimen>
 </resources>
