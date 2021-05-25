@@ -7,5 +7,5 @@ interface LocalRepository {
     fun getAllWatchHistory(): List<WatchHistoryEntity>
     fun save(watchHistoryEntity: WatchHistoryEntity)
     fun saveComment(commentEntity: CommentEntity)
-    fun getComments(filmId:Long):List<CommentEntity>
+    fun getComments(filmId:Long, onGetComments: ((comments: List<CommentEntity>)->Unit)?)
 }

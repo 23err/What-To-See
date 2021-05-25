@@ -1,5 +1,7 @@
 package com.example.whattosee.viewmodel
 
+import android.os.Handler
+import android.os.HandlerThread
 import androidx.lifecycle.MutableLiveData
 import com.example.whattosee.app.App
 import com.example.whattosee.model.datastate.CategoryDataState
@@ -12,8 +14,10 @@ class WatchHistoryViewModel(
 ) {
     fun getAll() {
         liveData.value = CategoryDataState.Loading
-        val watchHistories = watchHistoryRepo.getAllWatchHistory()
 
-//        liveData.value = CategoryDataState.Success(watchHistoryRepo.getAllWatchHistory())
+        App.handler.post{
+            val watchHistories = watchHistoryRepo.getAllWatchHistory()
+        }
+
     }
 }

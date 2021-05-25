@@ -38,7 +38,9 @@ class FilmViewModel(
     }
 
     fun saveWatchHistory(watchHistoryEntity: WatchHistoryEntity){
-        localRepo.save(watchHistoryEntity)
+        App.handler.post{
+            localRepo.save(watchHistoryEntity)
+        }
     }
 
     fun saveComment(commentEntity: CommentEntity) {

@@ -124,6 +124,7 @@
                     android:id="@+id/rvComments"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_marginTop="@dimen/desctiption_margin"
                     tools:itemCount="1" />
 
@@ -143,7 +144,11 @@
                     android:layout_gravity="end"
                     android:layout_marginTop="@dimen/desctiption_margin"
                     android:text="@string/send" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_height"/>
             </LinearLayout>
+
 
         </androidx.core.widget.NestedScrollView>
 

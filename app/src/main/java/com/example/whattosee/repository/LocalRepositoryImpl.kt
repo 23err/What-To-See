@@ -9,20 +9,23 @@ import com.example.whattosee.room.WatchHistoryEntity
 class LocalRepositoryImpl(
     private val watchHistoryDAO: WatchHistoryDAO = App.getWatchHistoryDao(),
     private val commentDao: CommentDao = App.getCommentDao()
-    ): LocalRepository {
+) : LocalRepository {
     override fun getAllWatchHistory(): List<WatchHistoryEntity> {
         return watchHistoryDAO.all()
     }
 
     override fun save(watchHistoryEntity: WatchHistoryEntity) {
-        watchHistoryDAO.save(watchHistoryEntity)
+        App.handler.post {
+            watchHistoryDAO.save(watchHistoryEntity)
+        }
     }
 
     override fun saveComment(commentEntity: CommentEntity) {
-        commentDao.saveComment(commentEntity)
+        App.handler.post { commentDao.saveComment(commentEntity) }
     }
 
-    override fun getComments(filmId: Long) : List<CommentEntity>{
-        return commentDao.getCommentToFilm(filmId)
+    override fun getComments(filmId: Long, onGetComments: ((comments: List<CommentEntity>)->Unit)?) {
+        val list = commentDao.getCommentsToFilm(filmId)
+        onGetComments?.let { it(list) }
     }
 }

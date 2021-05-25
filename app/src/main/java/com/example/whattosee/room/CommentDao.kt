@@ -7,7 +7,7 @@ import androidx.room.Query
 @Dao
 interface CommentDao {
     @Query("SELECT * FROM CommentEntity WHERE filmId = :filmId")
-    fun getCommentToFilm(filmId:Long):List<CommentEntity>
+    fun getCommentsToFilm(filmId:Long):List<CommentEntity>
 
     @Insert
     fun saveComment(commentEntity: CommentEntity)
