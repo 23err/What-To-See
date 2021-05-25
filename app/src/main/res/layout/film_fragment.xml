@@ -126,6 +126,7 @@
                     android:layout_height="match_parent"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_marginTop="@dimen/desctiption_margin"
+                    tools:listitem="@layout/rv_comment_item"
                     tools:itemCount="1" />
 
                 <EditText
@@ -134,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/comment_padding"
                     android:layout_marginTop="@dimen/desctiption_margin"
-                    android:background="@drawable/message_background"
+                    android:background="@drawable/new_message_background"
                     android:minLines="2" />
 
                 <com.google.android.material.button.MaterialButton

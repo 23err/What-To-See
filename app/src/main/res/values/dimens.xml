@@ -15,4 +15,8 @@
     <dimen name="desctiption_margin">10dp</dimen>
     <dimen name="comment_padding">10dp</dimen>
     <dimen name="space_height">280dp</dimen>
+    <dimen name="comment_message_padding">15dp</dimen>
+    <dimen name="comment_date_size">14sp</dimen>
+    <dimen name="comment_message_text">18sp</dimen>
+    <dimen name="comment_message_margin">10dp</dimen>
 </resources>

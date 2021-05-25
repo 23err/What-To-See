@@ -47,6 +47,10 @@ class FilmViewModel(
         localRepo.saveComment(commentEntity)
     }
 
+    fun getComments(filmId: Int, onGetComments: (list:List<CommentEntity>)->Unit){
+        localRepo.getComments(filmId.toLong(), onGetComments)
+    }
+
     private fun liveDataError(message: String = App.context.getString(R.string.error_occurred)) {
         liveDataToObserve.postValue(
             FilmDataState.Error(

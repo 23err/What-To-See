@@ -6,6 +6,8 @@ import com.example.whattosee.model.Film
 import com.example.whattosee.model.FilmDTO
 import com.example.whattosee.model.PageDTO
 import com.google.android.material.snackbar.Snackbar
+import java.sql.Date
+import java.text.SimpleDateFormat
 
 fun View.show() {
     this.visibility = View.VISIBLE
@@ -50,3 +52,8 @@ fun FilmDTO.toFilm(): Film  = with(this){
 }
 
 fun PageDTO.toFilms() = this.results.map { it.toFilm() }
+
+fun Date.format(): String{
+    val format = SimpleDateFormat("dd.MM.yyyy HH:mm")
+    return format.format(this)
+}

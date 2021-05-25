@@ -16,6 +16,7 @@ import com.example.whattosee.model.datastate.FilmDataState
 import com.example.whattosee.room.CommentEntity
 import com.example.whattosee.room.WatchHistoryEntity
 import com.example.whattosee.show
+import com.example.whattosee.view.adapters.RVCommentAdapter
 import com.example.whattosee.viewmodel.FilmViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
@@ -30,6 +31,7 @@ class FilmFragment : BaseFragment() {
     private val viewModel: FilmViewModel by lazy {
         ViewModelProvider(this).get(FilmViewModel::class.java)
     }
+    private val adapter by lazy { RVCommentAdapter(requireContext()) }
 
     companion object {
         private const val ID_FILM = "idFilm"
@@ -59,8 +61,9 @@ class FilmFragment : BaseFragment() {
             liveDataToObserve.observe(viewLifecycleOwner) { renderData(it) }
             getFilm(filmId)
             saveWatchHistory(WatchHistoryEntity(0, filmId.toLong()))
-            initClickListener()
         }
+        initClickListener()
+        initAdapter()
     }
 
     private fun renderData(it: FilmDataState) = with(binding) {
@@ -88,6 +91,23 @@ class FilmFragment : BaseFragment() {
             if (commentText.length > 0) {
                 viewModel.saveComment(CommentEntity(0, commentText, filmId.toLong()))
                 etComment.text = null
+                getComments(true)
+            }
+        }
+    }
+
+    private fun initAdapter() = with(binding){
+        rvComments.adapter = adapter
+        getComments()
+    }
+
+    private fun getComments(insertItem:Boolean = false) {
+        viewModel.getComments(filmId) {
+            adapter.list = it
+            if (insertItem){
+                adapter.notifyItemInserted(it.size - 1)
+            } else {
+                adapter.notifyDataSetChanged()
             }
         }
     }
