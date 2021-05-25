@@ -3,13 +3,17 @@ package com.example.whattosee.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.whattosee.App
+import com.example.whattosee.app.App
 import com.example.whattosee.R
 import com.example.whattosee.model.FilmDTO
 import com.example.whattosee.model.RemoteDataSource
 import com.example.whattosee.model.Repository
 import com.example.whattosee.model.RepositoryImpl
 import com.example.whattosee.model.datastate.FilmDataState
+import com.example.whattosee.repository.LocalRepository
+import com.example.whattosee.repository.LocalRepositoryImpl
+import com.example.whattosee.room.CommentEntity
+import com.example.whattosee.room.WatchHistoryEntity
 import com.example.whattosee.toFilm
 import retrofit2.Call
 import retrofit2.Callback
@@ -18,7 +22,8 @@ import java.lang.Error
 
 class FilmViewModel(
     val liveDataToObserve: MutableLiveData<FilmDataState> = MutableLiveData(),
-    private val repository: Repository = RepositoryImpl(RemoteDataSource())
+    private val repository: Repository = RepositoryImpl(RemoteDataSource()),
+    private val localRepo: LocalRepository = LocalRepositoryImpl(App.getWatchHistoryDao(), App.getCommentDao())
 ) : ViewModel() {
 
     companion object {
@@ -30,6 +35,14 @@ class FilmViewModel(
     fun getFilm(filmId: Int) {
         liveDataToObserve.value = FilmDataState.Loading
         repository.getFilm(filmId, callback)
+    }
+
+    fun saveWatchHistory(watchHistoryEntity: WatchHistoryEntity){
+        localRepo.save(watchHistoryEntity)
+    }
+
+    fun saveComment(commentEntity: CommentEntity) {
+        localRepo.saveComment(commentEntity)
     }
 
     private fun liveDataError(message: String = App.context.getString(R.string.error_occurred)) {

@@ -1,26 +1,18 @@
 package com.example.whattosee.view
 
-import RVCategoryAdapter
-import android.content.Intent
-import android.content.IntentFilter
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
-import androidx.lifecycle.Observer
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.lifecycle.ViewModelProvider
 import com.example.whattosee.*
-import com.example.whattosee.model.datastate.CategoriesDataState
-import com.example.whattosee.broadcastreceiver.FILMS_BROADCAST_INTENT
-import com.example.whattosee.broadcastreceiver.FilmsLoadBroadcastReceiver
 import com.example.whattosee.databinding.MainFragmentBinding
 import com.example.whattosee.model.Category
 import com.example.whattosee.model.Film
-import com.example.whattosee.service.LoadService
+import com.example.whattosee.model.datastate.CategoriesDataState
+import com.example.whattosee.view.adapters.RVCategoryAdapter
 import com.example.whattosee.view.adapters.RVFilmAdapter
 import com.example.whattosee.viewmodel.MainViewModel
 
 class MainFragment : BaseFragment() {
-
     companion object {
         fun newInstance() = MainFragment()
     }
@@ -28,7 +20,7 @@ class MainFragment : BaseFragment() {
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainViewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
-    private lateinit var adapter: RVCategoryAdapter
+    private lateinit var categoryAdapter: RVCategoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,7 +74,7 @@ class MainFragment : BaseFragment() {
     }
 
     private fun setRecyclerView() = with(binding) {
-        adapter = RVCategoryAdapter(
+        categoryAdapter = RVCategoryAdapter(
             requireContext(),
             onCategoryClick = object : RVCategoryAdapter.OnCategoryClick {
                 override fun onClick(category: Category) {
@@ -107,7 +99,7 @@ class MainFragment : BaseFragment() {
         when (state) {
             is CategoriesDataState.Success -> {
                 loadingLayout.root.hide()
-                adapter.apply {
+                categoryAdapter.apply {
                     categoryList = state.categories
                     notifyDataSetChanged()
                 }
