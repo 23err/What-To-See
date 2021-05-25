@@ -48,75 +48,110 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tvRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rating"
-                android:textSize="@dimen/film_body_text_size"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/tv_start_margin"
-                android:textSize="@dimen/film_body_text_size"
-                app:layout_constraintStart_toEndOf="@+id/tvRating"
-                app:layout_constraintTop_toTopOf="@+id/tvRating"
-                tools:text="9.2" />
-
-            <TextView
-                android:id="@+id/tvBudget"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/tv_start_margin"
-                android:text="@string/budget"
-                android:textSize="@dimen/film_body_text_size"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvRating" />
+                    <TextView
+                        android:id="@+id/tvRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rating"
+                        android:textSize="@dimen/film_body_text_size" />
 
 
-            <TextView
-                android:id="@+id/budget"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/tv_start_margin"
-                android:textSize="@dimen/film_body_text_size"
-                app:layout_constraintStart_toEndOf="@+id/tvBudget"
-                app:layout_constraintTop_toTopOf="@+id/tvBudget"
-                tools:text="3,000,000$" />
+                    <TextView
+                        android:id="@+id/rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/tv_start_margin"
+                        android:textSize="@dimen/film_body_text_size"
+                        tools:text="9.2" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/tv_start_margin"
-                android:text="@string/description"
-                android:textSize="@dimen/film_body_text_size"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvBudget" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/desctiption_margin"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/tv_start_margin"
-                android:textSize="@dimen/film_body_text_size"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvDescription"
-                tools:text="@string/tools_description_text" />
+                    <TextView
+                        android:id="@+id/tvBudget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/budget"
+                        android:textSize="@dimen/film_body_text_size" />
+
+                    <TextView
+                        android:id="@+id/budget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/tv_start_margin"
+                        android:textSize="@dimen/film_body_text_size"
+                        tools:text="3,000,000$" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/desctiption_margin"
+                    android:text="@string/description"
+                    android:textSize="@dimen/film_body_text_size" />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/tv_start_margin"
+                    android:textSize="@dimen/film_body_text_size"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvDescription"
+                    tools:text="@string/tools_description_text" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvComments"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_marginTop="@dimen/desctiption_margin"
+                    tools:listitem="@layout/rv_comment_item"
+                    tools:itemCount="1" />
+
+                <EditText
+                    android:id="@+id/etComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/comment_padding"
+                    android:layout_marginTop="@dimen/desctiption_margin"
+                    android:background="@drawable/new_message_background"
+                    android:minLines="2" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="@dimen/desctiption_margin"
+                    android:text="@string/send" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_height"/>
+            </LinearLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.core.widget.NestedScrollView>
 

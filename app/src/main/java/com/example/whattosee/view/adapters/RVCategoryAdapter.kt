@@ -1,10 +1,10 @@
-import com.example.whattosee.view.adapters.RVFilmAdapter
+package com.example.whattosee.view.adapters
+
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.whattosee.ImageLoaderTask
 import com.example.whattosee.databinding.RvCategoryItemBinding
 import com.example.whattosee.model.Category
 
@@ -21,14 +21,14 @@ class RVCategoryAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RVCategoryAdapter.ViewHolder {
+    ): ViewHolder {
         val layoutInflater = LayoutInflater.from(context)
         _binding = RvCategoryItemBinding.inflate(layoutInflater)
         val view = binding.root
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: RVCategoryAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(categoryList[position])
     }
 

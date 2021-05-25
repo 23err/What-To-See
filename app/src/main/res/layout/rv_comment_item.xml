@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginVertical="@dimen/comment_message_margin"
+    android:background="@drawable/message_background"
+    android:padding="@dimen/comment_message_padding">
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:textColor="?attr/colorPrimary"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/comment_date_size"
+        tools:text="22.03.2021 16:18" />
+
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/comment_message_text"
+        tools:text="Заметка к фильму" />
+
+
+</LinearLayout>

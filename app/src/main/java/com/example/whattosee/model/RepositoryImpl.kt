@@ -4,7 +4,6 @@ import retrofit2.Callback
 
 
 class RepositoryImpl(private val remoteDataSource: RemoteDataSource) : Repository {
-    var categories: List<Category>? = null
 
     override fun getCategoryList(callback: Callback<PageDTO>){
         remoteDataSource.getFilms(callback)

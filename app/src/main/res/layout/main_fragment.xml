@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainFragment">
+    tools:context=".view.MainFragment"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:titleTextColor="?attr/colorOnPrimary"
+        android:layout_width="match_parent"
+        android:background="?attr/colorPrimary"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCategory"
@@ -20,4 +30,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</FrameLayout>
+</LinearLayout>

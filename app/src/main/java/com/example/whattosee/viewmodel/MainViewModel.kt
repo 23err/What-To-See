@@ -3,7 +3,7 @@ package com.example.whattosee.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.whattosee.App
+import com.example.whattosee.app.App
 import com.example.whattosee.R
 import com.example.whattosee.model.*
 import com.example.whattosee.model.datastate.CategoriesDataState
