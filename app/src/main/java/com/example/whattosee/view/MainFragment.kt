@@ -57,6 +57,10 @@ class MainFragment : BaseFragment() {
                 Navigation.setFragment(requireFragmentManager(), SettingFragment.getInstance())
                 return true
             }
+            R.id.menuContacts -> {
+                Navigation.setFragment(requireFragmentManager(), ContactFragment.getInstance())
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
