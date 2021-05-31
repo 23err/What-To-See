@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import com.example.whattosee.R
 import com.example.whattosee.databinding.ContactFragmentBinding
 import com.example.whattosee.model.Contact
 import com.example.whattosee.view.adapters.RVContactAdapter
@@ -23,7 +24,7 @@ class ContactFragment : BaseFragment() {
 
     companion object {
 
-        const val REQUEST_CODE = 42
+        private const val REQUEST_CODE = 42
 
         fun getInstance(): ContactFragment {
             return ContactFragment()
@@ -74,12 +75,12 @@ class ContactFragment : BaseFragment() {
                 }
                 shouldShowRequestPermissionRationale(Manifest.permission.CALL_PHONE) -> {
                     AlertDialog.Builder(it)
-                        .setTitle("Разрешение совершать звонки")
-                        .setMessage("Объснение")
-                        .setPositiveButton("Предоставить доступ") { _, _ ->
+                        .setTitle(getString(R.string.allow_making_call))
+                        .setMessage(getString(R.string.explaination))
+                        .setPositiveButton(getString(R.string.grant_access)) { _, _ ->
                             requestPermission()
                         }
-                        .setNegativeButton("Не надо") { dialog, _ ->
+                        .setNegativeButton(getString(R.string.not_necessary)) { dialog, _ ->
                             dialog.dismiss()
                         }
                         .create()
@@ -100,14 +101,14 @@ class ContactFragment : BaseFragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             REQUEST_CODE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.isNotEmpty() && grantResults.first() == PackageManager.PERMISSION_GRANTED) {
                     getContacts()
                 } else {
                     context?.let {
                         AlertDialog.Builder(it)
-                            .setTitle("Доступ к контактам")
-                            .setMessage("Объяснения")
-                            .setNegativeButton("Закрыть") { dialog, _ ->
+                            .setTitle(getString(R.string.access_to_contacts))
+                            .setMessage(getString(R.string.explaination))
+                            .setNegativeButton(getString(R.string.close)) { dialog, _ ->
                                 dialog.dismiss()
                             }
                             .create()
@@ -128,12 +129,12 @@ class ContactFragment : BaseFragment() {
                 }
                 shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS) -> {
                     AlertDialog.Builder(it)
-                        .setTitle("Доступ к контактам")
-                        .setMessage("Объснение")
-                        .setPositiveButton("Предоставить доступ") { _, _ ->
+                        .setTitle(getString(R.string.access_to_contacts))
+                        .setMessage(getString(R.string.explaination))
+                        .setPositiveButton(getString(R.string.grant_access)) { _, _ ->
                             requestPermission()
                         }
-                        .setNegativeButton("Не надо") { dialog, _ ->
+                        .setNegativeButton(getString(R.string.not_necessary)) { dialog, _ ->
                             dialog.dismiss()
                         }
                         .create()
@@ -191,7 +192,6 @@ class ContactFragment : BaseFragment() {
                                         it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
                                 }
                             }
-
                         }
                         val contact = Contact(id, name, phoneNumber)
                         listContacts.add(contact)
