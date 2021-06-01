@@ -1,35 +1,44 @@
 package com.example.whattosee.view
 
-import androidx.fragment.app.Fragment
-
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.whattosee.R
-
+import com.example.whattosee.databinding.FragmentMapsBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.fragment_maps.*
+import java.io.IOException
 
 class MapsFragment : Fragment() {
 
+    companion object{
+        fun getInstance(): MapsFragment {
+            return MapsFragment()
+        }
+    }
+
+    var _binding: FragmentMapsBinding? = null
+    val binding get() = _binding!!
+    private lateinit var map: GoogleMap
+
     private val callback = OnMapReadyCallback { googleMap ->
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        map = googleMap
+        val initialPlace = LatLng(52.52000659999999, 13.404953999999975)
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(initialPlace))
+        googleMap.setOnMapLongClickListener {
+            getAddressAsync(it)
+        }
     }
 
     override fun onCreateView(
@@ -37,12 +46,80 @@ class MapsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_maps, container, false)
+        _binding = FragmentMapsBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        val mapFragment = childFragmentManager.findFragmentById(R.id.googleMapFragment) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
+        initSearchByAddress()
+    }
+
+    private fun initSearchByAddress() = with(binding){
+        binding.buttonSearch.setOnClickListener {
+            val geoCoder = Geocoder(it.context)
+            val searchText = searchAddress.text.toString()
+            Thread {
+                try {
+                    val addresses = geoCoder.getFromLocationName(searchText, 1)
+                    if (addresses.size > 0) {
+                        goToAddress(addresses, it, searchText)
+                    }
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }.start()
+        }
+    }
+
+    private fun goToAddress(
+        addresses: MutableList<Address>,
+        view: View,
+        searchText: String
+    ) {
+        val location = LatLng(
+            addresses[0].latitude,
+            addresses[0].longitude
+        )
+        view.post {
+            setMarker(location, searchText, R.drawable.anchor)
+            map.moveCamera(
+                CameraUpdateFactory.newLatLngZoom(
+                    location,
+                    15f
+                )
+            )
+        }
+    }
+
+    private fun setMarker(
+        location: LatLng,
+        searchText: String,
+        resourceId: Int
+    ): Marker? {
+        return map.addMarker(
+            MarkerOptions()
+                .position(location)
+                .title(searchText)
+                .icon(BitmapDescriptorFactory.fromResource(resourceId))
+        )
+    }
+
+
+    private fun getAddressAsync(location: LatLng) = with(binding) {
+        context?.let {
+            val geoCoder = Geocoder(it)
+            Thread {
+                try {
+                    val addresses =
+                        geoCoder.getFromLocation(location.latitude, location.longitude, 1)
+                    textAddress.post { textAddress.text = addresses[0].getAddressLine(0) }
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }.start()
+        }
     }
 }

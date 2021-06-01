@@ -22,4 +22,7 @@
     <string name="not_necessary">Не надо</string>
     <string name="access_to_contacts">Доступ к контактам</string>
     <string name="close">Закрыть</string>
+    <string name="map">Карта</string>
+    <string name="button_search_map">Поиск</string>
+    <string name="default_address">Москва</string>
 </resources>
