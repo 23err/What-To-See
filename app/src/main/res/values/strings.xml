@@ -16,4 +16,13 @@
     <string name="adult_content">Контент для взрослых</string>
     <string name="send">Отправить</string>
     <string name="contacts">Контакты</string>
+    <string name="allow_making_call">Разрешение совершать звонки</string>
+    <string name="explaination">Объснение</string>
+    <string name="grant_access">Предоставить доступ</string>
+    <string name="not_necessary">Не надо</string>
+    <string name="access_to_contacts">Доступ к контактам</string>
+    <string name="close">Закрыть</string>
+    <string name="map">Карта</string>
+    <string name="button_search_map">Поиск</string>
+    <string name="default_address">Москва</string>
 </resources>

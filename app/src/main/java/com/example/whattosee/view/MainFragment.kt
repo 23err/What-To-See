@@ -61,6 +61,9 @@ class MainFragment : BaseFragment() {
                 Navigation.setFragment(requireFragmentManager(), ContactFragment.getInstance())
                 return true
             }
+            R.id.menuMap -> {
+                Navigation.setFragment(requireFragmentManager(), MapsFragment.getInstance())
+            }
         }
         return super.onOptionsItemSelected(item)
     }

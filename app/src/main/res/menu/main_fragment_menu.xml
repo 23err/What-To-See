@@ -11,6 +11,10 @@
         android:title="@string/contacts"
         app:showAsAction="never" />
     <item
+        android:id="@+id/menuMap"
+        android:title="@string/map"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/menuConfig"
         android:title="Настройки"
         app:showAsAction="never" />
