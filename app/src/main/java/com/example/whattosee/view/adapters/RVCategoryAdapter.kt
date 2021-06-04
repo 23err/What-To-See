@@ -36,7 +36,7 @@ class RVCategoryAdapter(
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(category: Category) = with(binding) {
-            val adapter = RVFilmAdapter(context, onFilmClickListener).apply {
+            RVFilmAdapter(context, onFilmClickListener).apply {
                 films = category.films
                 rvFilms.adapter = this
             }

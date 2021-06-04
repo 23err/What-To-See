@@ -1,7 +1,5 @@
 package com.example.whattosee.viewmodel
 
-import android.os.Handler
-import android.os.HandlerThread
 import androidx.lifecycle.MutableLiveData
 import com.example.whattosee.app.App
 import com.example.whattosee.model.datastate.CategoryDataState

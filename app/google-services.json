@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "723088702069",
+    "project_id": "what-to-see-f40c0",
+    "storage_bucket": "what-to-see-f40c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723088702069:android:e23f0ba0a46aa15a17163c",
+        "android_client_info": {
+          "package_name": "com.example.whattosee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723088702069-drm4pui7dthbjs91t44o2brr6a0u53u1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC718kgTcyuDUGsoMCPNFsJMFR1_eLolyM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723088702069-drm4pui7dthbjs91t44o2brr6a0u53u1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
