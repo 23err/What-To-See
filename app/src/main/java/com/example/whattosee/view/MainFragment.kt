@@ -1,7 +1,9 @@
 package com.example.whattosee.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.whattosee.*
 import com.example.whattosee.databinding.MainFragmentBinding
@@ -11,9 +13,12 @@ import com.example.whattosee.model.datastate.CategoriesDataState
 import com.example.whattosee.view.adapters.RVCategoryAdapter
 import com.example.whattosee.view.adapters.RVFilmAdapter
 import com.example.whattosee.viewmodel.MainViewModel
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 
 class MainFragment : BaseFragment() {
     companion object {
+        const val TAG = "main_fragment"
         fun newInstance() = MainFragment()
     }
 
@@ -123,4 +128,6 @@ class MainFragment : BaseFragment() {
     private fun initData() {
         viewModel.getCategories()
     }
+
+
 }

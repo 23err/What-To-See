@@ -42,9 +42,9 @@ fun FilmDTO.toFilm(): Film  = with(this){
         id ?: 0,
         title ?: "",
         original_title ?: "-",
-        vote_average.toString() ?: "-",
+        vote_average?.toString() ?: "-",
         overview ?: "",
-        "https://image.tmdb.org/t/p/w500" + backdrop_path ?: "",
+        "https://image.tmdb.org/t/p/w500" + backdrop_path,
         budget?.let { if (it == 0) "-" else it.toString() } ?: "-",
         release_date ?: "-",
 
