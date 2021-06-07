@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import com.example.whattosee.ImageLoaderTask
 import com.example.whattosee.R
 import com.example.whattosee.databinding.FilmFragmentBinding
 import com.example.whattosee.hide
@@ -21,8 +20,6 @@ import com.example.whattosee.viewmodel.FilmViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.film_fragment.*
-import java.sql.Date
-import java.time.LocalDateTime
 
 class FilmFragment : BaseFragment() {
     private var _binding: FilmFragmentBinding? = null

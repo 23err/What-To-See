@@ -28,15 +28,6 @@ fun View.showSnackBar(
         .show()
 }
 
-fun View.showSnackBar(
-    messageResId: Int,
-    action: View.OnClickListener? = null,
-    actionText: String = "",
-    duration: Int = Snackbar.LENGTH_INDEFINITE,
-) {
-    this.showSnackBar(resources.getString(messageResId), action, actionText, duration)
-}
-
 fun FilmDTO.toFilm(): Film  = with(this){
     Film(
         id ?: 0,

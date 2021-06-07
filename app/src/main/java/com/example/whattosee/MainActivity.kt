@@ -10,8 +10,6 @@ import com.example.whattosee.view.MainFragment
 import com.example.whattosee.view.Navigation
 
 class MainActivity : AppCompatActivity() {
-    private val TAG = "Main Activity"
-    private lateinit var fragmentContainer:FrameLayout
     private val receiver = MainBroadcastReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {

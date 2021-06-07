@@ -4,13 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.whattosee.ImageLoaderTask
-import com.example.whattosee.R
 import com.example.whattosee.databinding.RvMovieItemBinding
 import com.example.whattosee.model.Film
 
