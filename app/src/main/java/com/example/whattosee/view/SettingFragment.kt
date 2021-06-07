@@ -13,8 +13,8 @@ import com.example.whattosee.databinding.SettingFragmentBinding
 
 class SettingFragment : BaseFragment() {
 
-    companion object{
-        fun getInstance() : SettingFragment{
+    companion object {
+        fun getInstance(): SettingFragment {
             return SettingFragment()
         }
     }
@@ -43,16 +43,15 @@ class SettingFragment : BaseFragment() {
         _binding = null
     }
 
-    private fun initSwitch() = with(binding){
+    private fun initSwitch() = with(binding) {
         swAdultContent.isChecked = getSPAdultMode()
     }
 
     private fun setChangeSwitcher() = with(binding) {
-        swAdultContent.setOnCheckedChangeListener(
-            CompoundButton.OnCheckedChangeListener() { compoundButton: CompoundButton, checked: Boolean ->
-                setSPAdultMode(checked)
-            }
-        )
+        swAdultContent.setOnCheckedChangeListener { compoundButton: CompoundButton, checked: Boolean ->
+            setSPAdultMode(checked)
+        }
+
     }
 
 

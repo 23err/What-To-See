@@ -27,7 +27,6 @@ class FilmViewModel(
 ) : ViewModel() {
 
     companion object {
-        private const val DELAY = 1000L
         private const val TAG = "FilmViewModel"
         private const val NO_DATA_FILM = "no data films"
     }
