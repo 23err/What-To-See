@@ -252,3 +252,6 @@ fabric.properties
 
 #map google key
 app/src/debug/res/values/google_maps_api.xml
+
+#signing password
+/sign_password.properties

@@ -50,7 +50,7 @@
 
         <service android:name=".service.LoadService" />
 
-        <receiver android:name=".broadcastreceiver.MainBroadcastReceiver">
+        <receiver android:name=".broadcastreceiver.MainBroadcastReceiver">g
             <intent-filter>
                 <action android:name="android.intent.action.LOCALE_CHANGED" />
             </intent-filter>
